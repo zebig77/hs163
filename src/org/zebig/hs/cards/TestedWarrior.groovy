@@ -1,7 +1,6 @@
 package org.zebig.hs.cards
 
 import org.zebig.hs.game.CardDefinition
-import org.zebig.hs.game.Game
 import org.zebig.hs.game.Target
 import org.zebig.hs.mechanics.buffs.Buff
 import org.zebig.hs.mechanics.buffs.BuffType
@@ -83,7 +82,7 @@ class Cleave extends CardDefinition {
 		text='Deal 2 damage to two random enemy minions.'
 		reserved_to="Warrior"
 		when_played(text) {
-			this_spell.deal_spell_damage(2, random_pick(2,enemy_minions))
+			this_spell.deal_spell_damage(2, random_pick(2,enemy_minions) as List)
 		}
 	}
 }
@@ -132,10 +131,10 @@ class Execute extends CardDefinition {
 		get_targets=[ { enemy_minion_targets.findAll{m->m.get_health() < m.get_max_health()} } ]
 		when_played(text) {
 			this_spell.destroy(
-				// TODO select_spell_target qui exploite get_targets
+				// TODO select_spell_target qui exploite get_targets ?
 					select_spell_target(
-						enemy_minion_targets.findAll{
-							m->m.get_health() < m.get_max_health()} ) )
+                            enemy_minion_targets.findAll{
+                                m->m.get_health() < m.get_max_health()} as List<Target>) )
 		}
 	}
 }
@@ -250,7 +249,9 @@ class Rampage extends CardDefinition {
 		reserved_to="Warrior"
 		get_targets=[ { your_minions.findAll{it.get_health() < it.get_max_health()} } ]
 		when_played(text) {
-			select_spell_target(your_minions.findAll{it.get_health() < it.get_max_health()}).gains("+3/+3")
+			select_spell_target(
+                    your_minions.findAll{it.get_health() < it.get_max_health()} as List<Target>
+            ).gains("+3/+3")
 		}
 	}
 }
