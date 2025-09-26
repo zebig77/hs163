@@ -2,6 +2,7 @@ package org.zebig.hs.cards
 
 import org.zebig.hs.game.Card
 import org.zebig.hs.game.CardDefinition
+import org.zebig.hs.logger.Log
 import org.zebig.hs.mechanics.buffs.BuffType
 
 import static org.zebig.hs.mechanics.buffs.BuffType.CANNOT_BE_TARGETED_BY_SPELL_OR_POWER
@@ -353,7 +354,7 @@ class CaptainsParrot extends CardDefinition {
 				def pirate_card = pirates[0]
 				you.deck.cards.remove(pirate_card)
 				you.hand.add(pirate_card)
-				println "   - $this_minion added $pirate_card to ${you}'s hand"
+				Log.info "   - $this_minion added $pirate_card to ${you}'s hand"
 			}
 		}
    }
@@ -1390,7 +1391,7 @@ class MurlocWarleader extends CardDefinition {
 				that_minion != warleader)
 				{
 					attack_increase += 2
-					println "   - $warleader gives attack_increase=+$attack_increase"
+					Log.info "   - $warleader gives attack_increase=+$attack_increase"
 				}
 			}
 			warleader.when_health_is_evaluated(text) {
@@ -1399,7 +1400,7 @@ class MurlocWarleader extends CardDefinition {
 				that_minion != warleader)
 				{
 					health_increase += 1
-					println "   - $warleader gives health_increase=+$health_increase"
+                    Log.info "   - $warleader gives health_increase=+$health_increase"
 				}
 			}
 		}

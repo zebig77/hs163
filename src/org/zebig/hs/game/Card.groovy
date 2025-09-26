@@ -1,5 +1,6 @@
 package org.zebig.hs.game
 
+import org.zebig.hs.logger.Log
 import org.zebig.hs.mechanics.Trigger
 import org.zebig.hs.mechanics.buffs.Buff
 import org.zebig.hs.mechanics.events.AnyCostIsEvaluated
@@ -52,7 +53,7 @@ class Card extends Target {
 				}
 			}
 		}
-		println "      . $this text = ${ps.text}"
+		Log.info "      . $this text = ${ps.text}"
 	}
 	
 	int getPlace() { ps.place }
@@ -123,7 +124,7 @@ class Card extends Target {
 		}
 		catch (IllegalActionException e) {
 			// pre-conditions non satisfied
-			println e
+			Log.info e.toString()
 			return false
 		}
 		if (this.is_a_minion() && game.active_player.minions.size() == 7 ) {
@@ -161,7 +162,7 @@ class Card extends Target {
 				result = global_e.lowest_cost
 			}
 		}
-		//println "      . evaluated cost = $result"
+		//Log.info "      . evaluated cost = $result"
 		return result
 	}
 	
@@ -264,7 +265,7 @@ class Card extends Target {
 		to.text	= from.text
 		to.triggers.clear()
 		from.triggers.each {
-			to.triggers.add(it)
+			to.triggers.add(it as Trigger)
 		}
 		to.type	= from.type
 	}

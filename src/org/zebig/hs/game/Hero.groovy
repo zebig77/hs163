@@ -1,5 +1,6 @@
 package org.zebig.hs.game
 
+import org.zebig.hs.logger.Log
 import org.zebig.hs.mechanics.events.BeforeUsePower
 import org.zebig.hs.mechanics.events.ItComesInPlay
 
@@ -33,7 +34,7 @@ class Hero extends Target {
 		if (armor < 0) {
 			armor = 0
 		}
-		println "   - $this armor = $armor"
+		Log.info "   - $this armor = $armor"
 	}
 	
 	boolean can_use_power(StringBuilder reason=new StringBuilder()) {
@@ -68,7 +69,7 @@ class Hero extends Target {
 	def equip_weapon(Weapon w) {
 		this.weapon = w
 		w.controller = this.controller
-		println "      . $this equips $w (${w.get_attack()}/${w.get_durability()})"
+        Log.info "      . $this equips $w (${w.get_attack()}/${w.get_durability()})"
 		new ItComesInPlay(w).check()
 	}
 	

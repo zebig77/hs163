@@ -1,5 +1,6 @@
 package org.zebig.hs.game
 
+import org.zebig.hs.logger.Log
 import org.zebig.hs.mechanics.Trigger
 import org.zebig.hs.mechanics.events.ItIsDestroyed
 
@@ -25,12 +26,12 @@ class Weapon extends Target {
 	
 	void add_attack(int value) {
 		attack += value
-		println "      . ${controller.hero}'s weapon attack is now ${get_attack()}"
+		Log.info "      . ${controller.hero}'s weapon attack is now ${get_attack()}"
 	}
 	
 	void add_durability(int value) {
 		durability += value
-		println "      . ${controller.hero}'s weapon durability is now ${get_durability()}"
+		Log.info "      . ${controller.hero}'s weapon durability is now ${get_durability()}"
 		if (get_durability() <= 0) {
 			demolish()
 		}
@@ -43,7 +44,7 @@ class Weapon extends Target {
 	void demolish() {
 		new ItIsDestroyed(this).check()
 		controller.hero.weapon = null
-		println "      . ${controller.hero}'s weapon destroyed"
+        Log.info "      . ${controller.hero}'s weapon destroyed"
 	}
 	
 }

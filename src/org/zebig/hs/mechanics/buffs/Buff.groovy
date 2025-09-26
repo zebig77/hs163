@@ -3,6 +3,7 @@ package org.zebig.hs.mechanics.buffs
 import org.zebig.hs.game.InvalidDefinitionException
 import org.zebig.hs.game.ScriptObject
 import org.zebig.hs.game.Target
+import org.zebig.hs.logger.Log
 import org.zebig.hs.mechanics.Trigger
 import org.zebig.hs.state.ListState
 
@@ -25,7 +26,7 @@ class Buff extends ScriptObject {
 		this.buff_type = buff_type
 		this.target = target
         this.triggers = new ListState<Trigger>(target.game)
-		println "      . added '$this' buff to '$target'"
+        Log.info "      . added '$this' buff to '$target'"
 	}
 	
 	Buff(String buff_string, Target target) {
@@ -33,7 +34,7 @@ class Buff extends ScriptObject {
 	}
 
 	def remove_effect() {
-		println "      . '$this' buff is removed from $target"
+		Log.info "      . '$this' buff is removed from $target"
 	}
 
 	String toString() {

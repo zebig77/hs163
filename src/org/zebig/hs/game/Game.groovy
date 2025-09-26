@@ -132,9 +132,9 @@ class Game {
 		else {
 			win_message = "!!! ${players[1]} wins !!!"
 		}
-		println '!'*win_message.size()
-		println win_message
-		println '!'*win_message.size()
+		Log.info '!'*win_message.size()
+		Log.info win_message
+		Log.info '!'*win_message.size()
         end_game()
 	}
 
@@ -220,13 +220,13 @@ class Game {
     // transform a card into another one
     void transform(Card c, String new_card_name ) {
         def new_c = new_card(new_card_name)
-        println "      . transforming $c into a '$new_card_name'"
+        Log.info "      . transforming $c into a '$new_card_name'"
         c.card_definition = new_c.card_definition
         c.init()
         new ItComesInPlay(c).check()
     }
 
-    static fight( Target attacker, Target attacked ) {
+    void fight( Target attacker, Target attacked ) {
 		
 		Log.info "   - fight begins between $attacker and $attacked"
 		Log.info "      . $attacker is ${attacker.get_attack()}/${attacker.get_health()}"

@@ -1,5 +1,6 @@
 package org.zebig.hs.game
 
+import org.zebig.hs.logger.Log
 import org.zebig.hs.mechanics.Trigger
 import org.zebig.hs.mechanics.buffs.BuffType
 import org.zebig.hs.mechanics.events.Event
@@ -25,10 +26,10 @@ class GameObject extends ScriptObject {
 
         List<Trigger> todo_triggers = triggers.findAll { (it as Trigger).event_class == e.class }
         todo_triggers.each { Trigger t ->
-            println "      . executing $t for ${this} because $e"
+            Log.info "      . executing $t for ${this} because $e"
             t.script.call()
             if (t.last_call()) {
-                println "      . removing $t because it was called for the last time"
+                Log.info "      . removing $t because it was called for the last time"
                 this.remove_trigger(t)
             }
         }

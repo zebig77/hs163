@@ -4,6 +4,7 @@ import org.zebig.hs.game.Card
 import org.zebig.hs.game.CardDefinition
 import org.zebig.hs.game.CardLibrary
 import org.zebig.hs.game.Game
+import org.zebig.hs.logger.Log
 import org.zebig.hs.mechanics.buffs.BuffType
 
 class AnimalCompanion extends CardDefinition {
@@ -246,7 +247,7 @@ class Leokk extends CardDefinition {
 					that_target != leokk)
 				{
 					attack_increase += 1
-					println "   - Leokk attack_increase=$attack_increase"
+					Log.info "   - Leokk attack_increase=$attack_increase"
 				}
 			}
 		}
@@ -413,7 +414,7 @@ class TimberWolf extends CardDefinition {
 				that_minion != timber_wolf)
 				{
 					attack_increase += 1
-					println "   - Timberwolf attack_increase=$attack_increase"
+                    Log.info "   - Timberwolf attack_increase=$attack_increase"
 				}
 			}
 		}
